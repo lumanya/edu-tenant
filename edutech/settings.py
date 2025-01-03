@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['*']
 
 SHARED_APPS = (
     'django_tenants',  
-    'school', 
+    'customers',
     'django.contrib.contenttypes', 
     'django.contrib.admin',  
     'django.contrib.auth',
@@ -46,14 +46,14 @@ SHARED_APPS = (
 
 TENANT_APPS = (
     # your tenant-specific apps
-   'student',
+   'schools',
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
 
-TENANT_MODEL = "school.School"
+TENANT_MODEL = "customers.Client"
 
-TENANT_DOMAIN_MODEL = "school.Domain" 
+TENANT_DOMAIN_MODEL = "customers.Domain" 
 
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
@@ -158,4 +158,4 @@ MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-PUBLIC_SCHEMA_URLCONF = 'school.urls'
+PUBLIC_SCHEMA_URLCONF = 'customers.urls'

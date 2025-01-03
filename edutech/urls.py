@@ -18,5 +18,5 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [    
-    path("", include('student.urls')),
+    path('', include('customers.urls')),
 ]
