@@ -29,11 +29,13 @@ DEBUG = os.getenv('DEBUG')
 ALLOWED_HOSTS = ['*']
 
 
+BASE_URL = 'localhost'
+PORT = ':8000'
 # Application definition
 
 SHARED_APPS = (
     'django_tenants',  
-    'customers',
+    'tenant_manager',
     'django.contrib.contenttypes', 
     'django.contrib.admin',  
     'django.contrib.auth',
@@ -41,19 +43,16 @@ SHARED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home',
     
 )
 
 TENANT_APPS = (
     # your tenant-specific apps
-   'schools',
+   'home',
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
-
-TENANT_MODEL = "customers.Client"
-
-TENANT_DOMAIN_MODEL = "customers.Domain" 
 
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
@@ -67,6 +66,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'edutech.urls'
+PUBLIC_SCHEMA_URLCONF = 'edutech.urls_public'
+
+TENANT_MODEL = "tenant_manager.Tenant"
+TENANT_DOMAIN_MODEL = "tenant_manager.Domain"
+SHOW_PUBLIC_IF_NO_TENANT_FOUND = True 
 
 TEMPLATES = [
     {
@@ -158,4 +162,3 @@ MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-PUBLIC_SCHEMA_URLCONF = 'customers.urls'

@@ -1,0 +1,16 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Edutenant</title>
+</head>
+<body>
+    <h1>{% if request.tenant %}
+            {{ request.tenant.name }}
+        {% else %}
+            SaaS Edutenant
+        {% endif %}
+    </h1>
+    
+</body>
+</html>
