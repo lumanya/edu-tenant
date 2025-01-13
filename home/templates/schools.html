@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="flex justify-center min-h-screen">
+    <div class="bg-sky-50 pt-24 w-full md:px-20 sm:px-4">
+        <table class="table-auto border border-collapse border-gray-300 shadow-lg  pt-11 w-full">
+            <caption class="caption-top pb-5 font-mono">
+                Registered Schools <span class="bg-sky-400 p-2 rounded-md text-white hover:bg-sky-300 shadow-lg"><a href="{% url 'home' %}">Add School</a></span>
+              </caption>
+            <thead class="border-b rounded-2xl">
+                <tr class="py-15 bg-sky-200">
+                    <th class="py-5 font-mono">School Name</th>
+                    <th class="py-5 font-mono">Domain</th>
+                    <th class="py-5 font-mono">Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for school in schools %}
+                <tr class="border-b even:bg-sky-50 odd:bg-white hover:bg-sky-100">
+                    <td class="py-3 px-4">{{ school.tenant.name }}</td>
+                   <td> <a href="http://{{ school.domain }}:8000" class="text-sky-600 hover:underline" 
+                    target="_blank" rel="noopener noreferrer">
+                        {{ school.domain }}
+                    </a></td>
+                    <td class="py-3 px-4">{{ school.tenant.address }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

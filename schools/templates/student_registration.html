@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section class="relative flex flex-col lg:flex-row items-center min-h-screen bg-sky-100 pb-8">
+    <div  class="basis-full lg:px-20 pt-14 px-4">
+        <h1 class="text-2xl font-semibold text-center lg:text-start">{{  request.tenant.name }}</h1>
+        <p class="pt-5 font-sans text-justify"><span class="font-mono">{{ request.tenant.name }} </span> is using Edu Tenant  a cloud-based platform designed to simplify the student registration process. 
+            It provides a streamlined and efficient way for <span class="font-mono underline">{{ request.tenant.name }}</span> to manage student registrations online, 
+            eliminating manual paperwork and reducing administrative workload.</p>
+    </div>
+    <div id="form" class=" mt-16 p-8 bg-sky-50 rounded-xl shadow-lg basis-full lg:mr-32">
+        <h1 class="text-3xl text-center mb-6">Register Student</h1>
+        
+        <form  method="post" class="space-y-6">
+            {% csrf_token %}
+            
+            {{ form.as_p }}                
+
+            <button type="submit" class="w-full bg-sky-400 py-2 rounded-md text-white hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Register Student</button>
+        </form>
+    </div>
+</section>
+
+
+{% endblock content %}

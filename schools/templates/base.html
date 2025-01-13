@@ -1,0 +1,45 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Edutenant</title>
+    <link href="{% static 'css/tailwind.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="https://img.icons8.com/glyph-neue/64/87CEEB/school.png" type="image/x-icon">
+    
+</head>
+<body>
+    
+    <header class="flex items-center justify-between px-8 bg-sky-500 py-2 text-white sticky top-0 z-50">
+        <logo>            
+            <a href="/" class="flex items-center gap-1">
+                <img class="h-12 mb-2" src="https://img.icons8.com/glyph-neue/64/ffffff/school.png" alt="school"/>
+                <span>Edu Tech</span>
+            </a>
+        </logo>
+        <nav>
+            <ul class="flex items-center">
+                {% if user.is_authenticated %}
+                <li class="flex items-center h-12 px-4  hover:bg-sky-400 rounded-lg bg-sky-400"><a href="{% url 'schools' %}">Schools</a></li>               
+                <li class="flex items-center h-12 px-4  hover:bg-sky-400 rounded-lg bg-sky-400"><a href="{% url 'account_logout' %}">Log Out</a></li>
+ 
+                {% else %}
+                <li class="flex items-center h-12 px-4  hover:bg-sky-400 rounded-lg bg-sky-400"><a href="{% url 'schools' %}">Schools</a></li> 
+                <li class="flex items-center h-12 px-4  hover:bg-sky-400 rounded-lg bg-sky-400"><a href="{% url 'account_login' %}">Login</a></li>
+                <li class="flex items-center h-12 px-4  hover:bg-sky-400 rounded-lg bg-sky-400"><a href="{% url 'account_signup' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+   {% block content %}
+   {% endblock content %}
+
+    <footer class="h-20 pt-5 bg-sky-200">
+        <hr class=" my-4 border-gray-300">
+        <p class="text-center font-mono text-gray-600">&copy;2025 Edutech SaaS. All rights rerseved.</p>
+    </footer>
+    
+   
+    
+</body>
+</html>

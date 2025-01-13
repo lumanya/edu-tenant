@@ -1,25 +1,40 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaaS Edutenant</title>
-</head>
-<body>
-    <h1>{% if request.tenant %}
-            {{ request.tenant.name }}
-        {% else %}
-            SaaS Edutenant
-        {% endif %}
-    </h1>
-    <div>
-        <h1>Register Your School</h1>
-        <div>
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ tenant_form.as_p }}
-                <button type="submit">Create</button>
-            </form>
-        </div>
+{% extends 'base.html' %}
+{% load static  %}
+
+
+{% block content %}
+
+<section class="h-screen relative">
+       
+    <img src="{% static 'img/bg.jpg' %}" class="w-full h-full object-cover " alt="">
+    <div class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
+        <h1 class="text-white text-4xl lg:text-6xl tracking-wide font-bold text-center">Edu Tenant SaaS</h1>
+        <p class="text-white pt-3 lg:text-xl font-mono">Simplify your school Management</p>
+        <a href="#form" class="bg-sky-500 rounded-lg text-white text-2xl px-4 py-2 mt-2 hover:bg-sky-600">Register</a>
     </div>
-</body>
-</html>
+</section>
+
+<section class="relative flex flex-col lg:flex-row items-center bg-sky-100 pb-8">
+    <div  class="basis-full lg:px-20 pt-14 px-4">
+        <h1 class="text-2xl font-semibold text-center lg:text-start">What is EduTenant SaaS?</h1>
+        <p class="pt-5 font-sans text-justify"><span class="font-bold">EduTenant SaaS </span> is a cloud-based platform designed to simplify the student registration process for educational institutions. 
+            It provides a streamlined and efficient way for schools to manage student registrations online, 
+            eliminating manual paperwork and reducing administrative workload.</p>
+    </div>
+    <div id="form" class=" mt-16 p-8 bg-sky-50 rounded-xl shadow-lg basis-full lg:mr-32">
+        <h1 class="text-3xl text-center mb-6">Register School</h1>
+        
+        <form action="{% url 'home' %}" method="post" class="space-y-6">
+            {% csrf_token %}
+            
+            {{ tenant_form.as_p }}                
+
+            <button type="submit" class="w-full bg-sky-400 py-2 rounded-md text-white hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Register School</button>
+        </form>
+    </div>
+</section>
+
+
+
+
+{% endblock content %}

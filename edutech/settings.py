@@ -43,6 +43,11 @@ SHARED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+        
+    #third party app
+    'allauth',
+    'allauth.account',
+    
     'home',
     
 )
@@ -50,6 +55,7 @@ SHARED_APPS = (
 TENANT_APPS = (
     # your tenant-specific apps
    'home',
+   'schools',
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
@@ -63,7 +69,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+    ]
+
 
 ROOT_URLCONF = 'edutech.urls'
 PUBLIC_SCHEMA_URLCONF = 'edutech.urls_public'
@@ -75,7 +88,9 @@ SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        "DIRS": [
+            BASE_DIR / "templates"
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -162,3 +177,6 @@ MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/accounts/login/'
